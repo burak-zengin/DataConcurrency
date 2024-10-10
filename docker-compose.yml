@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  optimisticlock.api:
+    image: ${DOCKER_REGISTRY-}optimisticlockapi
+    build:
+      context: .
+      dockerfile: src/OptimisticLock/OptimisticLock.Api/Dockerfile
+  mssql:
+    image: "mcr.microsoft.com/azure-sql-edge"
+    environment:
+        - ACCEPT_EULA=1
+        - MSSQL_USER=SA
+        - MSSQL_SA_PASSWORD=P@sSw0rd!
+        - MSSQL_PID=Developer
+    ports:
+        - "1433:1433"  
